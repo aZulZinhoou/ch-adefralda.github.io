@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Chá de Panela</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Lista de Chá de Panela</h1>
+  <div class="lista" id="lista"></div>
+
+  <script>
+    const utensilios = [
+      "Conjunto de panelas",
+      "Espremedor de alho",
+      "Abridor de latas",
+      "Ralador",
+      "Jogo de medidores",
+      "Forma para bolo",
+      "Assadeira",
+      "Concha de feijão",
+      "Peneira",
+      "Espátula de silicone"
+    ];
+
+    const lista = document.getElementById("lista");
+
+    utensilios.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = `
+        <span class="nome-item" id="item-${index}">${item}</span>
+        <div>
+          <input type="text" placeholder="Seu nome" id="input-${index}">
+          <button onclick="confirmar(${index})">Confirmar</button>
+        </div>
+      `;
+      lista.appendChild(div);
+    });
+
+    function confirmar(index) {
+      const input = document.getElementById(`input-${index}`);
+      const nome = input.value.trim();
+      const itemTexto = document.getElementById(`item-${index}`);
+
+      if (nome !== "") {
+        const itemDiv = itemTexto.parentElement;
+        itemDiv.innerHTML = `<span class="riscado">${itemTexto.textContent} - ${nome}</span>`;
+      } else {
+        alert("Por favor, digite seu nome para confirmar.");
+      }
+    }
+  </script>
+</body>
+</html>
